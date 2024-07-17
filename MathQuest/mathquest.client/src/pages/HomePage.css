@@ -1,0 +1,90 @@
+﻿/* HomePage.css */
+
+.homepage {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.homepage-header {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .homepage-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        color:#1E88E5;
+    }
+
+    .homepage-header p {
+        font-size: 1.2em;
+        color: #555;
+    }
+
+.homepage-article {
+    text-align: left;
+}
+
+.homepage-section {
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .homepage-section h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        color: #1E88E5;
+    }
+
+    .homepage-section p {
+        font-size: 1.2em;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .homepage-section ul {
+        list-style: none;
+        padding: 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+        .homepage-section ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+            .homepage-section ul li::before {
+                content: '✓';
+                color: #28a745;
+                position: absolute;
+                left: 0;
+                top: 0;
+                font-size: 1.2em;
+            }
+
+blockquote {
+    font-style: italic;
+    color: #666;
+    border-left: 4px solid #28a745;
+    padding-left: 10px;
+    margin: 20px 0;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }

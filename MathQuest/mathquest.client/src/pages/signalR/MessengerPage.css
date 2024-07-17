@@ -1,0 +1,153 @@
+.messenger-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+    .messenger-container h1 {
+        color: #1E88E5;
+    }
+
+.recent-messages {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.conversation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.conversation-item:hover {
+        background-color: #f0f0f0;
+}
+
+.friend-info {
+    display: flex;
+    align-items: center;
+}
+
+.friend-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.friend-username {
+    font-weight: bold;
+}
+
+.latest-message {
+    flex: 1;
+    text-align: right;
+    margin-left: 10px;
+    color: #666;
+}
+
+.conversation-details {
+    width: 100%;
+    max-width: 600px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.conversation-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.friend-avatar-small {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.message-date {
+    font-size: 0.8em;
+    color: gray;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.message-right {
+    justify-content: flex-end;
+}
+
+.message-left {
+    justify-content: flex-start;
+}
+
+.message-sender-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.sender-name {
+    flex: 1;
+    font-weight: bold;
+    margin-right: 10px;
+    word-wrap: break-word;
+}
+
+.message-text {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message-right .message-text {
+    background-color: #d4edda; 
+    color: #155724; 
+}
+
+.message-left .message-text {
+    background-color: #f8d7da; 
+    color: #721c24; 
+}
+
+.message-input {
+    display: flex;
+    margin-top: 20px;
+}
+
+.message-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+}
+
+.message-input button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+}
+
+.message-input button:hover {
+            background-color: #0056b3;
+}

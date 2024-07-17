@@ -1,0 +1,24 @@
+.permission-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.permission-container .title {
+        font-size: 2em;
+        margin-bottom: 0.5em;
+}
+
+.permission-container .message {
+        font-size: 1.2em;
+        margin-bottom: 1em;
+}
+
+.permission-container .button {
+        padding: 0.5em 1em;
+        font-size: 1em;
+        cursor: pointer;
+}

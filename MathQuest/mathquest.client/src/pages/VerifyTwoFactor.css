@@ -1,0 +1,70 @@
+.verify-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f8fc;
+    padding: 20px;
+}
+
+.verify-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+    .verify-card h2 {
+        margin-bottom: 20px;
+        color: #1E88E5;
+        font-size: 24px;
+    }
+
+.verify-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+    .verify-form .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #1E88E5;
+    }
+
+    .verify-form .form-group input[type="text"],
+    .verify-form .form-group input[type="checkbox"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .verify-form .form-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+    }
+
+.verify-form .error-message {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.verify-form .submit-button:hover {
+    background: #00f2fe;
+    border-color: #646cff;
+}

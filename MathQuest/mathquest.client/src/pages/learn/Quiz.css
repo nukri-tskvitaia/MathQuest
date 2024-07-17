@@ -1,0 +1,96 @@
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 60%;
+}
+
+.question-container {
+    margin-bottom: 20px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answers button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #1E88E5;
+        width: 80%;
+        max-width: 300px;
+        transition: background-color 0.3s, color 0.3s;
+}
+
+.answers button:hover {
+            background-color: green;
+}
+
+.results-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.results-container p {
+        font-size: 18px;
+        margin-bottom: 10px;
+}
+
+.results-container button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: green;
+        color: white;
+        transition: background-color 0.3s;
+}
+
+.results-container button:hover {
+            background-color: #45a049;
+}
+
+/* For CountingQuiz.jsx */
+.apples-container {
+    margin-top: 20px;
+}
+
+.apples-container span {
+        font-size: 24px;
+        margin: 2px;
+}
+/* End */
+
+/* For smaller screen size */
+@media (max-width: 600px) {
+    .number {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .number-row {
+        justify-content: center;
+    }
+
+    .apples-container span {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,66 @@
+.geometry-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+    .geometry-page h1 {
+        text-align: center;
+        color: #1E88E5;
+    }
+
+.topic {
+    margin-bottom: 20px;
+}
+
+    .topic h2 {
+        color: #0073e6;
+    }
+
+    .topic p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+.shapes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.shape {
+    text-align: center;
+    margin: 10px;
+}
+
+    .shape svg {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .shape p {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+.clock-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.clock {
+    display: block;
+    margin: 0 auto;
+}
+
+.ruler-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ruler {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,138 @@
+/* Admin Page Container */
+.admin-page {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+    /* Section Headers */
+    .admin-page h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #333333;
+    }
+
+    /* Button Styles */
+    .admin-page button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 10px 0;
+    }
+
+        .admin-page button:hover {
+            background-color: #0056b3;
+        }
+
+    /* Input Styles */
+    .admin-page input[type="text"], .admin-page input[type="date"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+        .admin-page input[type="text"]::placeholder, .admin-page input[type="date"]::placeholder {
+            color: #888;
+        }
+
+/* Users Section */
+.users-section {
+    margin-bottom: 20px;
+}
+
+    /* User List */
+    .users-section ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .users-section li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .users-section li:hover {
+            background-color: #f0f0f0;
+        }
+
+/* Details Section */
+.details-section {
+    margin-top: 20px;
+}
+
+/* Feedback Modal */
+.feedback-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback-modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .feedback-modal-content h2 {
+        margin-top: 0;
+    }
+
+    .feedback-modal-content ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .feedback-modal-content li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .feedback-modal-content button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+    }
+
+        .feedback-modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+/* Error Message */
+.error-message {
+    color: red;
+    margin-top: 20px;
+}

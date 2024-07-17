@@ -1,0 +1,70 @@
+.leaderboard-container {
+    max-width: 800px;
+    min-height: 100vh;
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .leaderboard-container h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+        color: #1E88E5;
+    }
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .leaderboard-table th, .leaderboard-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .leaderboard-table thead {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .leaderboard-table th {
+        font-weight: bold;
+        color: rebeccapurple;
+        background-color: lightgreen;
+    }
+
+    .leaderboard-table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .leaderboard-table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .leaderboard-table td {
+        font-size: 1em;
+        color: darkorange;
+    }
+
+        .leaderboard-table td.rank {
+            background-color: #ffc107;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .leaderboard-table td.username {
+            font-weight: bold;
+        }
+
+        .leaderboard-table td.score {
+            background-color: #28a745;
+            color: #fff;
+            font-weight: bold;
+        }

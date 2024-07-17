@@ -1,0 +1,69 @@
+/* ProfilePage.css */
+
+.profile-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-top: 68px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .profile-header h2 {
+        font-size: 24px;
+        color: #1E88E5;
+    }
+
+.profile-main {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-nav {
+    min-width: 200px;
+    margin-right: 20px;
+    width: auto;
+}
+
+.profile-nav-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-nav-item {
+    margin-bottom: 10px;
+}
+
+.profile-nav-link {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .profile-nav-link:hover {
+        background-color: #e9ecef;
+    }
+
+.profile-content {
+    flex-grow: 1; /* Ensures content area takes up remaining space */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+}
+
+    .profile-content.visible {
+        display: block; /* Show when visible class is added */
+    }

@@ -1,0 +1,181 @@
+/* Base styles for the LearnPage component */
+.learn-page {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+/* Sidebar for grade links */
+.grades-sidebar {
+    width: 250px; /* Changed width to ensure containment */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Links for grades */
+.grade-link {
+    text-decoration: none;
+    color: #ecf0f1;
+    background: #e7e7e7;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+    .grade-link.unlocked {
+        background: #1E88E5;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .grade-link.locked {
+        background: #ccc;
+        color: #999;
+        cursor: not-allowed;
+        
+    }
+
+    .grade-link:hover {
+        background: #646cff;
+        transform: translateY(-1px);
+    }
+
+/* Main content area */
+.grade-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 20px; /* Ensure margin for spacing */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .grade-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: dodgerblue;
+    }
+
+.test-button {
+    padding: 10px 20px;
+    background: #3498db;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+    .test-button:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+    }
+
+/* Modal styles */
+.test-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.test-modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-button {
+    background: #e74c3c;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .modal-button:hover {
+        background: #c0392b;
+        transform: translateY(-2px);
+    }
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .learn-page {
+        flex-direction: column;
+    }
+
+    .grades-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px 0;
+        margin-bottom: 20px;
+    }
+
+    .grade-content {
+        width: 100%;
+        padding: 20px;
+        margin-left: 0;
+    }
+
+    .grade-link {
+        flex: 1;
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grade-link {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .grade-content h1 {
+        font-size: 1.5em;
+    }
+
+    .modal-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
