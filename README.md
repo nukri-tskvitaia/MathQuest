@@ -188,6 +188,7 @@ services.AddAuthentication()
 **5. Email Service:**
 
 5.1. **Setup SMTP**
+
 If you wish to use the email service rather than the console for sending emails, replace the placeholder values in the configuration below with your actual SMTP server details.
 
 ```json
@@ -204,6 +205,7 @@ If you wish to use the email service rather than the console for sending emails,
 5.2. **Modify the Authorization Controller Endpoints:**
 
 5.2.1 **Register Endpoint:**
+
   If you want to send email confirmation messages, add the following code to the Register endpoint in your AuthorizationController. Uncomment the email sending lines:
 
 ```csharp
@@ -214,6 +216,7 @@ await _emailSenderService
 ```
 
 5.2.2 **Remove Console Email Sender (Optional)**
+
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
@@ -226,6 +229,7 @@ If you prefer not to use the console email sender, comment the following lines f
 
 
 5.2.3 **Register/Resend Confirmation Endpoint:**
+
 For resending confirmation emails, add and uncomment the following code in the Register/ResendConfirmation endpoint:
 ```csharp
 // Uncomment this code to resend a confirmation email
@@ -235,6 +239,7 @@ await _emailSenderService
 ```
 
 5.2.4 **Remove Console Email Sender (Optional)**
+
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
@@ -246,6 +251,7 @@ await _consoleEmailSenderService.SendEmailAsync(
 ```
 
 5.2.5 **Search Email Endpoint:**
+
 For password reset emails, use the following code in the SearchEmail endpoint. Uncomment the relevant lines:
 
 ```csharp
@@ -256,6 +262,7 @@ await _emailSenderService
 ```
 
 5.2.6 **Remove Console Email Sender (Optional)**
+
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
