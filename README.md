@@ -120,7 +120,8 @@ dotnet tool install --global dotnet-ef --version 8.0.0
 (or any such version 8.0.x For example, --version 8.0.6)
   
 - Create a new migration and apply it:
-Make sure you are in this directory... ***absolute_path_to_your_folder/Mathquest/Data*** from there you can run the following commands:
+  
+Make sure you are in this directory in a Terminal or Command Prompt... ***absolute_path_to_your_folder/Mathquest/Data*** from there you can run the following commands:
 
   ```bash
   dotnet ef migrations add InitialCreate --output-dir Migrations --startup-project ../MathQuest/MathQuest.Server
@@ -168,7 +169,8 @@ The __MathQuest.Server__ project is already set up to use Google authentication.
         {
             opts.ClientId = Configuration["Google:ClientId"];
             opts.ClientSecret = Configuration["Google:ClientSecret"];
-        });```
+        });
+```
 
 Make any additional changes as needed to integrate Google authentication into the application fully.
 
@@ -184,6 +186,7 @@ services.AddAuthentication()
 ```
 
 **5. Email Service:**
+
 5.1. **Setup SMTP**
 If you wish to use the email service rather than the console for sending emails, replace the placeholder values in the configuration below with your actual SMTP server details.
 
@@ -199,6 +202,7 @@ If you wish to use the email service rather than the console for sending emails,
 }
 ```
 5.2. **Modify the Authorization Controller Endpoints:**
+
 5.2.1 **Register Endpoint:**
   If you want to send email confirmation messages, add the following code to the Register endpoint in your AuthorizationController. Uncomment the email sending lines:
 
@@ -209,7 +213,7 @@ await _emailSenderService
     .ConfigureAwait(false);
 ```
 
-5.2.2 ** Remove Console Email Sender (Optional)**
+5.2.2 **Remove Console Email Sender (Optional)**
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
@@ -230,7 +234,7 @@ await _emailSenderService
     .ConfigureAwait(false);
 ```
 
-5.2.4 ** Remove Console Email Sender (Optional)**
+5.2.4 **Remove Console Email Sender (Optional)**
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
@@ -251,7 +255,7 @@ await _emailSenderService
     .ConfigureAwait(false);
 ```
 
-5.2.6 ** Remove Console Email Sender (Optional)**
+5.2.6 **Remove Console Email Sender (Optional)**
 If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
