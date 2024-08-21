@@ -9,6 +9,10 @@ bin/
 Data/DB/MathQuest.mdf
 Data/DB/MathQuest_log.ldf
 
+# Keep DB and Test folder
+!Data/DB/.gitkeep
+!Data/DB/Test/.gitkeep
+
 # Ignore everything in the Data/Migrations folder
 Data/Migrations/*
 
