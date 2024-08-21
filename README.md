@@ -189,6 +189,8 @@ services.AddAuthentication()
 
 5.1. **Setup SMTP**
 
+**Note:** _If you prefer to use the console mail sender instead of a mail service, you can skip this section and jump directly to the [Running the Application](#running-the-application)` section._
+
 If you wish to use the email service rather than the console for activation or restoration links, replace the placeholder values in the configuration below with your actual SMTP server details.
 
 ```json
@@ -202,8 +204,6 @@ If you wish to use the email service rather than the console for activation or r
   "UseSsl": true
 }
 ```
-
-If you want to keep console mail sender and not to use mail service then you can omit this section and go to `Running the Application` section directly.
 
 5.2. **Modify the Authorization Controller Endpoints:**
 
