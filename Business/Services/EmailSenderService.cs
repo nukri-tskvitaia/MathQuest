@@ -4,7 +4,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace IdentityApp2.Services
+namespace Business.Services
 {
     public class EmailSenderService : IEmailSenderService
     {

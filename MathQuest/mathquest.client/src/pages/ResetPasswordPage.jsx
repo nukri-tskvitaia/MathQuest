@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import customAxios from '../services/customAxios';
+import './ResetPasswordPage.css';
 
 const ResetPasswordPage = () => {
     const navigate = useNavigate();
@@ -39,10 +40,10 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div>
-            <h2>Reset Password</h2>
-            <form onSubmit={handleResetPassword}>
-                <div>
+        <div className="reset-password-container">
+            <form onSubmit={handleResetPassword} className="reset-password-form">
+                <h2>Reset Password</h2>
+                <div className="form-group">
                     <label>New Password:</label>
                     <input
                         type="password"
@@ -52,7 +53,7 @@ const ResetPasswordPage = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Confirm Password:</label>
                     <input
                         type="password"
@@ -62,9 +63,9 @@ const ResetPasswordPage = () => {
                         required
                     />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                {message && <p style={{ color: 'green' }}>{message}</p>}
-                <button type="submit">Reset Password</button>
+                {error && <p className="error-message">{error}</p>}
+                {message && <p className="success-message">{message}</p>}
+                <button type="submit" className="reset-password-button">Reset Password</button>
             </form>
         </div>
     );

@@ -1,0 +1,23 @@
+# Ignore build directories
+obj/
+bin/
+
+# Ignore Visual Studio files
+.vs/
+
+# Ignore database files
+Data/DB/MathQuest.mdf
+Data/DB/MathQuest_log.ldf
+
+# Ignore everything in the Data/Migrations folder
+Data/Migrations/*
+
+# Keep the Migrations folder itself
+!Data/Migrations/.gitkeep
+
+# Ignore everything in the profile folder
+MathQuest/mathquest.client/public/images/profile/*
+
+# Keep the profile folder itself
+!MathQuest/mathquest.client/public/images/profile/.gitkeep
+

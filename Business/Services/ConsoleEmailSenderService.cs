@@ -1,17 +1,18 @@
-﻿using Business.Interfaces;
+﻿using System;
+using Business.Interfaces;
 using System.Web;
 
-namespace IdentityApp2.Services
+namespace Business.Services
 {
     public class ConsoleEmailSenderService : IConsoleEmailSenderService
     {
         public Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
         {
-            System.Console.WriteLine("---New Email----");
-            System.Console.WriteLine($"To: {emailAddress}");
-            System.Console.WriteLine($"Subject: {subject}");
-            System.Console.WriteLine(HttpUtility.HtmlDecode(htmlMessage));
-            System.Console.WriteLine("-------");
+            Console.WriteLine("---New Email----");
+            Console.WriteLine($"To: {emailAddress}");
+            Console.WriteLine($"Subject: {subject}");
+            Console.WriteLine(HttpUtility.HtmlDecode(htmlMessage));
+            Console.WriteLine("-------");
             return Task.CompletedTask;
         }
     }

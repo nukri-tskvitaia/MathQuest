@@ -96,6 +96,9 @@ namespace MathQuestWebApi.Controllers
                 "Confirm your email",
                 $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
             .ConfigureAwait(false);
+            //await _emailSenderService
+            //.SendEmailAsync(model.Email, "Confirm your email", $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
+            //.ConfigureAwait(false);
 
             return Ok(new { Message = "User registered successfully. Please check your email for the confirmation link.", confirmationToken });
         }
@@ -125,6 +128,9 @@ namespace MathQuestWebApi.Controllers
                 "Confirm your email",
                 $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
             .ConfigureAwait(false);
+            //await _emailSenderService
+                //.SendEmailAsync(email, "Confirm your email", $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
+                //.ConfigureAwait(false);
 
             return Ok(new { Message = "Please check your email for the confirmation link.", confirmationToken });
         }
@@ -172,6 +178,7 @@ namespace MathQuestWebApi.Controllers
                 "Password Reset",
                 $"<p>Please reset your password by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
             .ConfigureAwait(false);
+            //await _emailSenderService.SendPasswordResetEmailAsync(email, confirmationLink).ConfigureAwait(false);
 
             return Ok(new { Message = "User Found Successfully", confirmationToken });
         }

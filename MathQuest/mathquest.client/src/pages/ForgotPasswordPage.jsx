@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import customAxios from '../services/customAxios';
+import './ForgotPasswordPage.css';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
@@ -28,23 +29,27 @@ const ForgotPasswordPage = () => {
     };
 
     return (
-        <div>
-            <h2>Forgot Password</h2>
-            <form onSubmit={handleSearch}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        required
-                    />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                {message && <p style={{ color: 'green' }}>{message}</p>}
-                <button type="submit">Search</button>
-            </form>
+        <div className="forgot-password-container">
+            <div className="forgot-password-form">
+                <h2>Forgot Password</h2>
+                <form onSubmit={handleSearch}>
+                    <div className="form-group">
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    {message && <p className="success-message">{message}</p>}
+                    <button type="submit" className="forgot-password-button">
+                        Search
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
