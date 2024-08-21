@@ -163,7 +163,7 @@ You need to configure your Google authentication settings in the `User Secrets` 
    }
 ```
 
-The __MathQuest.Server__ project is already set up to use Google authentication. You can verify this in the Startup.cs file. The relevant code snippet is:
+The `MathQuest.Server` project is already set up to use Google authentication. You can verify this in the Startup.cs file. The relevant code snippet is:
 ```csharp services.AddAuthentication()
         .AddGoogle(opts =>
         {
@@ -279,6 +279,7 @@ If you prefer not to use the console email sender, comment the following lines f
 ### Running the Application
 
 **1. Build the Solution:**
+
 Build the solution using:
 
 ```bash
@@ -288,6 +289,7 @@ dotnet build
 During the build process, dotnet restore will automatically run if necessary to restore any missing packages.
 
 **2. Run the Application:**
+
 Make sure you run only `MathQuest.Server` project `MathQuest.Client` will open automatically
 
 ```bash
