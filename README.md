@@ -66,8 +66,8 @@ dotnet --list-sdks
   [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
 
 **5. Node Js:**
-- Download and install Node.js version 20.11.x (any such version) or later one
-- [Node.js](https://nodejs.org/en)
+- Download and install Node.js version 20.11.x (any such version) or later ones
+[Node.js](https://nodejs.org/en)
 - Make sure that it is installed by running the following command in a Command Prompt or Terminal:
 
 ```bash
@@ -172,7 +172,7 @@ The __MathQuest.Server__ project is already set up to use Google authentication.
         });
 ```
 
-Make any additional changes as needed to integrate Google authentication into the application fully.
+Make any additional changes as needed to integrate Google authentication fully into the application.
 
 If you choose not to use Google authentication, you can disable it by commenting out or removing the Google authentication setup code.
 In your Startup.cs file, comment out or delete the following lines:
@@ -189,7 +189,7 @@ services.AddAuthentication()
 
 5.1. **Setup SMTP**
 
-If you wish to use the email service rather than the console for sending emails, replace the placeholder values in the configuration below with your actual SMTP server details.
+If you wish to use the email service rather than the console for activation or restoration links, replace the placeholder values in the configuration below with your actual SMTP server details.
 
 ```json
 "Mail": {
@@ -202,22 +202,25 @@ If you wish to use the email service rather than the console for sending emails,
   "UseSsl": true
 }
 ```
+
+If you want to keep console mail sender and not to use mail service then you can omit this section and go to `Running the Application` section directly.
+
 5.2. **Modify the Authorization Controller Endpoints:**
 
 5.2.1 **Register Endpoint:**
 
-  If you want to send email confirmation messages, add the following code to the Register endpoint in your AuthorizationController. Uncomment the email sending lines:
+  If you want to send email confirmation messages, add the following code to the `Register` endpoint in your AuthorizationController. Uncomment the email sending lines:
 
 ```csharp
   // Uncomment this code to send a confirmation email
 await _emailSenderService
-    .SendEmailAsync(email, "Confirm your email", $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
+    .SendEmailAsync(model.Email, "Confirm your email", $"<p>Please confirm your account by clicking this link: <a href=\"{confirmationLink}\">link</a></p>")
     .ConfigureAwait(false);
 ```
 
 5.2.2 **Remove Console Email Sender (Optional)**
 
-If you prefer not to use the console email sender, comment the following lines from the code above the _emailSenderService:
+If you prefer not to use the console for links, comment the following lines from the code above the _emailSenderService:
 ```csharp
 // Comment this code
             await _consoleEmailSenderService.SendEmailAsync(
@@ -228,9 +231,9 @@ If you prefer not to use the console email sender, comment the following lines f
 ```
 
 
-5.2.3 **Register/Resend Confirmation Endpoint:**
+5.2.3 **Register/Resend-Confirmation Endpoint:**
 
-For resending confirmation emails, add and uncomment the following code in the Register/ResendConfirmation endpoint:
+For resending confirmation emails, add and uncomment the following code in the `Register/Resend-Confirmation` endpoint:
 ```csharp
 // Uncomment this code to resend a confirmation email
 await _emailSenderService
@@ -250,9 +253,9 @@ await _consoleEmailSenderService.SendEmailAsync(
 .ConfigureAwait(false);
 ```
 
-5.2.5 **Search Email Endpoint:**
+5.2.5 **Search-Email Endpoint:**
 
-For password reset emails, use the following code in the SearchEmail endpoint. Uncomment the relevant lines:
+For password reset emails, use the following code in the `Search-Email` endpoint. Uncomment the relevant lines:
 
 ```csharp
 // Uncomment this code to send a password reset email
@@ -291,8 +294,8 @@ Make sure you run only `MathQuest.Server` project `MathQuest.Client` will open a
 dotnet run
 ```
 **3. Access the App:**
-- Your browser should be opened automatically if not then navigate to [Web Api](https://localhost:5001) to view the Web Api.
-- The frontend will be running on [Frontend](https://localhost:5100).
+- Your browser should be opened automatically if not then navigate to [https://localhost:5001](https://localhost:5001) to view the Web Api.
+- The frontend will be running on [https://localhost:5100](https://localhost:5100).
 - If you face any npm related issues make sure to install `npm`. Open `MathQuest.Client` project directory in Terminal or Command Prompt and run the following command:
 
   ```bash
