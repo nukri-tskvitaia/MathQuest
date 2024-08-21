@@ -103,7 +103,7 @@ cd MathQuest
 - Your connection string should look something like this:
 
 ```json
-AttachDbFilename=\\absolute_path_to_your_project\\mathquest-project\\Data\\DB\\MathQuest.mdf
+AttachDbFilename=\\absolute_path_to_your_project\\Mathquest\\Data\\DB\\MathQuest.mdf
 ```
 
 - Ensure that you have `dotnet-ef` installed by running this command in a Command Prompt or Terminal:
