@@ -79,31 +79,31 @@ node -v
 - **Using Https:**
   
 ```bash
-git clone https://github.com/nukri-tskvitaia/MathQuest.git
+git clone https://github.com/nukri-tskvitaia/mathquest-project.git
 ```
 
 ```bash
-cd MathQuest
+cd mathquest-project
 ```
 
 - **Or using SSH:**
   
 ```bash
-git clone git@github.com:nukri-tskvitaia/MathQuest.git
+git clone git@github.com:nukri-tskvitaia/mathquest-project.git
 ```
 
 ```bash
-cd MathQuest
+cd mathquest-project
 ```
 
 **2. Set up the database:**
 - Ensure that SQL Server is running.
-- Update the connection string in ***appsettings.Development.json*** file (Located in __MathQuest.Server project__)
-- Modify the __AttachDbFilename__ property in your connection string to point to the absolute path of the __MathQuest.mdf__ file.
+- Update the connection string in ***appsettings.Development.json*** file (Located in `MathQuest.Server project`)
+- Modify the ***AttachDbFilename*** property in your connection string to point to the absolute path of the ***MathQuest.mdf*** file.
 - Your connection string should look something like this:
 
 ```json
-AttachDbFilename=\\absolute_path_to_your_project\\Mathquest\\Data\\DB\\MathQuest.mdf
+AttachDbFilename=\\absolute_path_to_your_project\\mathquest-project\\Data\\DB\\MathQuest.mdf
 ```
 
 - Ensure that you have `dotnet-ef` installed by running this command in a Command Prompt or Terminal:
@@ -121,7 +121,7 @@ dotnet tool install --global dotnet-ef --version 8.0.0
   
 - Create a new migration and apply it:
   
-Make sure you are in this directory in a Terminal or Command Prompt... ***absolute_path_to_your_folder/Mathquest/Data*** from there you can run the following commands:
+Make sure you are in this directory in a Terminal or Command Prompt... ***absolute_path_to_your_folder/mathquest-project/Data*** from there you can run the following commands:
 
   ```bash
   dotnet ef migrations add InitialCreate --output-dir Migrations --startup-project ../MathQuest/MathQuest.Server
