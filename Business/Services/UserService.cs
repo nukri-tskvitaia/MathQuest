@@ -258,13 +258,13 @@ namespace Business.Services
             }
         }
 
-        public async Task<(string token, IEnumerable<string> roles, LoginResult result)> SignInUserAsync(LoginModel model, HttpContext httpContext)
+        public async Task<(LoginResult result, IEnumerable<string> roles)> SignInUserAsync(LoginModel model, HttpContext httpContext)
         {
             var user = await _userManager.FindByEmailAsync(model.Email).ConfigureAwait(false);
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password).ConfigureAwait(false))
             {
-                return (string.Empty, Enumerable.Empty<string>(), LoginResult.InvalidCredentials);
+                return (LoginResult.InvalidCredentials, Enumerable.Empty<string>());
             }
 
             var isDeviceRemembered = httpContext.Request.Cookies.ContainsKey("remember_device");
@@ -273,32 +273,31 @@ namespace Business.Services
 
             if (isTwoFactorEnabled && !isUserIdMatching && !isDeviceRemembered)
             {
-                return (string.Empty, Enumerable.Empty<string>(), LoginResult.RequiresTwoFactor);
+                return (LoginResult.RequiresTwoFactor, Enumerable.Empty<string>());
             }
 
             var accessToken = await GenerateTokensAsync(httpContext, model.Email, model.RememberMe);
             await SetActiveStatusAsync(user.Id, true);
 
             var roles = await GetUserRolesAsync(user.Id);
-            var userRoles = ConvertStringsToUserRoles(roles);
 
-            return (accessToken, userRoles, LoginResult.Success);
+            return (LoginResult.Success, roles);
         }
 
-        public async Task<(string token, IEnumerable<string> roles, LoginResult result)> SignInUserWithTwoFactorAsync(HttpContext httpContext, TwoFactorModel model)
+        public async Task<(LoginResult result, IEnumerable<string> roles)> SignInUserWithTwoFactorAsync(HttpContext httpContext, TwoFactorModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
             {
-                return (string.Empty, Enumerable.Empty<string>(), LoginResult.InvalidCredentials);
+                return (LoginResult.InvalidCredentials, Enumerable.Empty<string>());
             }
 
             var result = await _userManager.VerifyTwoFactorTokenAsync(user, TokenOptions.DefaultAuthenticatorProvider, model.Code);
 
             if (!result)
             {
-                return (string.Empty, Enumerable.Empty<string>(), LoginResult.InvalidCredentials);
+                return (LoginResult.InvalidCredentials, Enumerable.Empty<string>());
             }
 
             if (model.RememberTwoFactorDevice)
@@ -310,9 +309,8 @@ namespace Business.Services
             await SetActiveStatusAsync(user.Id, true);
 
             var roles = await GetUserRolesAsync(user.Id);
-            var userRoles = ConvertStringsToUserRoles(roles);
 
-            return (accessToken, userRoles, LoginResult.Success);
+            return (LoginResult.Success, roles);
         }
 
         public async Task<IdentityResult> ConfirmRegistrationAsync(string email, string confirmationToken)
@@ -398,41 +396,25 @@ namespace Business.Services
             return accessToken;
         }
 
-        public async Task<(RefreshTokenModel? model, IEnumerable<string> roles)> GetRefreshTokenAsync(HttpContext httpContext, bool rememberMe)
+        public async Task<(bool result, IEnumerable<string> roles)> GetRefreshTokenAsync(HttpContext httpContext, bool rememberMe)
         {
             var refreshToken = httpContext.Request.Cookies["RefreshToken"];
 
             if (refreshToken == null)
             {
-                return (null, Enumerable.Empty<string>());
+                return (false, Enumerable.Empty<string>());
             }
 
             var user = await _jwtService.GetUserByRefreshTokenAsync(refreshToken).ConfigureAwait(false);
             if (user == null)
             {
-                return (null, Enumerable.Empty<string>());
+                return (false, Enumerable.Empty<string>());
             }
 
             if (!await _jwtService.IsRefreshTokenValidAsync(refreshToken).ConfigureAwait(false))
             {
-                return (null, Enumerable.Empty<string>());
+                return (false, Enumerable.Empty<string>());
             }
-
-            /*
-
-            var principal = _jwtService.GetPrincipalFromExpiredToken(httpContext.Request.Cookies["AccessToken"]);
-
-            if (principal == null)
-            {
-                return null;
-            }
-
-            var principalUser = await _jwtService.GetUserFromPrincipalAsync(principal);
-
-            if (principalUser == null)
-            {
-                return null;
-            } */
 
             var newAccessToken = await _jwtService.GenerateJwtAccessTokenAsync(user).ConfigureAwait(false);
             _jwtService.SetAccessTokenCookie(httpContext, newAccessToken);
@@ -442,15 +424,8 @@ namespace Business.Services
             _jwtService.SetRefreshTokenCookie(httpContext, newRefreshToken, rememberMe);
 
             var roles = await GetUserRolesAsync(user.Id);
-            var userRoles = ConvertStringsToUserRoles(roles);
 
-            var model = new RefreshTokenModel
-            {
-                AccessToken = newAccessToken,
-                RefreshToken = newRefreshToken
-            };
-
-            return (model, userRoles);
+            return (true, roles);
         }
 
         public async Task RemoveTokensAsync(string refreshToken, HttpContext httpContext)
@@ -509,31 +484,6 @@ namespace Business.Services
                 await _userManager.UpdateAsync(user).ConfigureAwait(false);
             }
         }
-        #endregion
-
-        #region Convert Roles To Hash
-
-        public List<string> ConvertStringsToUserRoles(IEnumerable<string> roles)
-        {
-            Dictionary<string, string> RoleMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "User", "$2b$10$RQbxyABCDy/VHZMBsghfLO.aPDYPVPLJDRSFT1iPxP3MSUwIStEGO" },
-                { "Admin", "$2b$10$2aXYuiABCDy/VHZMBsgLkO4PyXPZORPSAF3KDJTG1iNp2VCEI.dGk" },
-            };
-
-        var userRoles = new List<string>();
-
-            foreach (var role in roles)
-            {
-                if (RoleMapping.TryGetValue(role, out var userRole))
-                {
-                    userRoles.Add(userRole);
-                }
-            }
-
-            return userRoles;
-        }
-
         #endregion
 
         #region Store Image Helper Method

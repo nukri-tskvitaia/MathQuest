@@ -1,10 +1,10 @@
 import CommunitySignalRChat from './CommunitySignalRChat';
-import './CommunityChatPage.css';
+import styles from './CommunityChatPage.module.css';
 
 function CommunityChatPage() {
     return (
-        <div className="chat-section">
-            <main className="signalr-chat-header">
+        <div className={styles.chatSection}>
+            <main className={styles.signalrChatHeader}>
                 <h1>Community Chat</h1>
                 <CommunitySignalRChat />
             </main>

@@ -9,7 +9,7 @@ namespace Data.Repositories
     {
         private readonly DbSet<Grade> _grades;
 
-        public GradeRepository(Data.MathQuestDbContext context)
+        public GradeRepository(MathQuestDbContext context)
             : base(context)
         {
             this._grades = context.Set<Grade>();

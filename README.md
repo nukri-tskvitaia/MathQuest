@@ -8,7 +8,9 @@ MathQuest is an educational website designed to help school students enhance the
 - [Technologies Used](#technologies-used)
 - [Testing](#testing)
 - [How to Run the App](#how-to-run-the-app)
+- [Initial Status](#initial-status)
 - [Current Status](#current-status)
+- [Next Steps](#next-steps)
 - [License](#license)
 - [Contributing](#contributing)
 
@@ -304,11 +306,30 @@ dotnet run
   npm install
   ```
 
+## Initial Status
+The `React.js` frontend was initially developed under tight deadlines, focusing primarily on functionality. Key aspects of this early phase included:
+
+ - **Authentication & Authorization:** Managed using local storage. While functional, this approach posed security limitations.
+- **Global CSS:** Applied universally across the application, leading to challenges with localized styling and theming.
+- **Axios Interceptor:** The Axios interceptor was implemented but did not function as expected.
+- **Profile Picture Display Issue:** On the initial page load, profile pictures were not displayed correctly. They only appeared after refreshing the page, and there was a problem where all messages showed the same profile picture regardless of the sender.
+
 ## Current Status
-The React.js code for the frontend was developed rapidly to meet tight deadlines, meaning there are opportunities for security and performance improvements. While the current implementation is functional, there are areas for optimization and enhancement to deliver a more seamless user experience.
+To enhance security and maintainability, several improvements have been implemented:
+
+- **State Management:** Authentication state and user roles are now managed exclusively using React Context. This approach avoids exposing sensitive data through browser storage, improving overall security.
+- **Axios Interceptor:** The Axios interceptor has been fixed and is now functioning correctly, ensuring reliable handling of API requests and responses.
+- **Profile Picture Display Fix:** The issue with profile pictures not displaying correctly on the initial page load has been resolved. Now, the correct profile picture is shown for each message, and images load properly without needing to refresh the page.
+
+## Next Steps
+- **Global CSS:** Full modularization and localization of the CSS are still in progress and should be prioritized to avoid styling conflicts.
+- **React Code Optimization:** Further optimization is needed to improve performance and fix existing bugs. This includes refining component logic, reducing unnecessary re-renders, and improving overall code efficiency.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/nukri-tskvitaia/MathQuest/blob/main/LICENSE) file for details.
 
 ## Contributing
 Contributions are welcome, especially in improving the security and performance of the frontend code. If you have ideas or find issues, feel free to open a pull request.
+
+## Return to Top
+- [Back to Top⬆️](#table-of-contents)

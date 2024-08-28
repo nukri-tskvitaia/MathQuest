@@ -9,7 +9,7 @@ namespace Data.Repositories
     {
         private readonly DbSet<UserAchievement> _userAchievements;
 
-        public UserAchievementRepository(Data.MathQuestDbContext context)
+        public UserAchievementRepository(MathQuestDbContext context)
             : base(context)
         {
             this._userAchievements = context.Set<UserAchievement>();

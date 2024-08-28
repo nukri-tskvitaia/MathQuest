@@ -1,7 +1,8 @@
 import './App.css';
-import { AuthProvider } from './context/AuthProvider';
-import CustomAxiosProvider from './services/customAxiosProvider';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState, useTransition } from 'react';
+import { useAuth } from './context/useAuth';
+import { Routes, Route } from 'react-router-dom';
+import { checkAuth } from './services/authCheck';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import VerifyTwoFactor from './pages/VerifyTwoFactorPage';
@@ -40,74 +41,100 @@ import PermissionDeniedPage from './pages/PermissionDeniedPage';
 import FeedbackPage from './pages/FeedbackPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
+    const { setIsAuthenticated, setRoles } = useAuth()
+    const [isPending, startTransition] = useTransition();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        console.log("calling check-auth to get user auth status");
+
+        startTransition(async () => {
+            await checkAuth(setIsAuthenticated, setRoles);
+            setLoading(false);
+        })
+    }, [setIsAuthenticated, setRoles]);
+
+    if (isPending || loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <Router>
-            <AuthProvider>
-                <CustomAxiosProvider>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
+        <Routes>
+            <Route path="/" element={<Layout />}>
 
-                            {/* for non-authorized route requests    */}
-                            <Route path="/login" element={<LoginPage />} />
-                            <Route path="/verify-2fa" element={<VerifyTwoFactor />} />
-                            <Route path="/register" element={<RegisterPage />} />
-                            <Route path="/confirm-email" element={<ConfirmEmail />} />
-                            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                            <Route path="/reset-password" element={<ResetPasswordPage />} />
-                            <Route path="/login-2fa" element={<LoginTwoFactorPage />} />
-                            <Route path="/privacy" element={<PrivacyPolicyPage />} />
-                            <Route path="/terms-of-service" element={<TermsOfServicePage /> } />
-                            <Route path="/permission-denied" element={< PermissionDeniedPage />} />
+                {/* for all kinds of route requests */}
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
+                <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                <Route path="/permission-denied" element={< PermissionDeniedPage />} />
 
-                            {/* for authorized route requests  */}
-                            <Route element={<RequireAuth allowedRoles={["$2b$10$RQbxyABCDy/VHZMBsghfLO.aPDYPVPLJDRSFT1iPxP3MSUwIStEGO", "$2b$10$2aXYuiABCDy/VHZMBsgLkO4PyXPZORPSAF3KDJTG1iNp2VCEI.dGk"]} />}>
-                                {/* Root URL displays HomePage */}
-                                <Route index element={<HomePage />} />
+                {/* only for non-authorized route requests */}
+                <Route path="/login" element={
+                    <ProtectedRoute element={<LoginPage />} redirectTo="/main" />
+                } />
+                <Route path="/register" element={
+                    <ProtectedRoute element={<RegisterPage />} redirectTo="/main" />
+                } />
+                <Route path="/verify-2fa" element={
+                    <ProtectedRoute element={<VerifyTwoFactor />} redirectTo="/main" />
+                } />
+                <Route path="/forgot-password" element={
+                    <ProtectedRoute element={<ForgotPasswordPage />} redirectTo="/main" />
+                } />
+                <Route path="/login-2fa" element={
+                    <ProtectedRoute element={<LoginTwoFactorPage />} redirectTo="/main" />
+                } />
+                <Route path="/confirm-email" element={
+                    <ProtectedRoute element={<ConfirmEmail />} redirectTo="/main" />
+                } />
 
-                                <Route path="/logout" element={<LogoutPage />} />
-                                <Route path="/main" element={<HomePage />} />
-                                <Route path="/learn" element={<LearnPage />} />
-                                <Route path="/community" element={<CommunityChatPage />} />
-                                <Route path="/leaderboard" element={<LeaderboardPage />} />
-                                <Route path="/profile" element={<ProfilePage />} >
-                                    <Route path="/profile/info" element={<UserInfo />} />
-                                    <Route path="/profile/change-password" element={<ChangePassword />} />
-                                    <Route path="/profile/two-factor" element={<TwoFactorAuth />} />
-                                </Route>
-                                <Route path="/friends" element={<FriendsPage />} />
-                                <Route path="/messages" element={<MessengerPage />} />
-                                <Route path="/feedback" element={<FeedbackPage />} />
+                {/* for authorized route requests  */}
+                <Route element={<RequireAuth allowedRoles={["Admin", "User"]} />}>
+                    {/* Root URL displays HomePage */}
+                    <Route index element={<HomePage />} />
 
-                                {/* First Grade Content  */}
-                                <Route path="/learn/first-grade" element={< Grade1 />} />
-                                <Route path="/learn/first-grade/count/" element={< CountingPage />} />
-                                <Route path="/learn/first-grade/count/counting-quiz" element={< CountingQuiz />} />
-                                <Route path="/learn/first-grade/count/before-after-quiz" element={< BeforeAfterQuiz />} />
-                                <Route path="/learn/first-grade/arithmetics" element={< SimpleArithemtics />} />
-                                <Route path="/learn/first-grade/arithmetics/addition-quiz" element={< AdditionQuiz />} />
-                                <Route path="/learn/first-grade/arithmetics/subtraction-quiz" element={< SubtractionQuiz />} />
-                                <Route path="/learn/first-grade/arithmetics/adding-1s-10s-quiz" element={< Adding1sAnd10sQuiz />} />
-                                <Route path="/learn/first-grade/geometry" element={< Geometry />} />
-                                <Route path="/learn/first-grade/geometry/length-quiz" element={< LengthQuiz />} />
-                                <Route path="/learn/first-grade/geometry/time-quiz" element={< TimeQuiz />} />
-                                <Route path="/learn/first-grade/geometry/shapes-quiz" element={< ShapesQuiz />} />
-                            </Route>
+                    <Route path="/logout" element={<LogoutPage />} />
+                    <Route path="/main" element={<HomePage />} />
+                    <Route path="/learn" element={<LearnPage />} />
+                    <Route path="/community" element={<CommunityChatPage />} />
+                    <Route path="/leaderboard" element={<LeaderboardPage />} />
+                    <Route path="/profile" element={<ProfilePage />} >
+                        <Route path="/profile/info" element={<UserInfo />} />
+                        <Route path="/profile/change-password" element={<ChangePassword />} />
+                        <Route path="/profile/two-factor" element={<TwoFactorAuth />} />
+                    </Route>
+                    <Route path="/friends" element={<FriendsPage />} />
+                    <Route path="/messages" element={<MessengerPage />} />
+                    <Route path="/feedback" element={<FeedbackPage />} />
 
-                            {/* only for admins  */}
-                            <Route element={<RequireAuth allowedRoles={["$2b$10$2aXYuiABCDy/VHZMBsgLkO4PyXPZORPSAF3KDJTG1iNp2VCEI.dGk"]} />}>
-                                <Route path="/admin" element={< AdminPage />} />
-                            </Route>
+                    {/* First Grade Content  */}
+                    <Route path="/learn/first-grade" element={< Grade1 />} />
+                    <Route path="/learn/first-grade/count/" element={< CountingPage />} />
+                    <Route path="/learn/first-grade/count/counting-quiz" element={< CountingQuiz />} />
+                    <Route path="/learn/first-grade/count/before-after-quiz" element={< BeforeAfterQuiz />} />
+                    <Route path="/learn/first-grade/arithmetics" element={< SimpleArithemtics />} />
+                    <Route path="/learn/first-grade/arithmetics/addition-quiz" element={< AdditionQuiz />} />
+                    <Route path="/learn/first-grade/arithmetics/subtraction-quiz" element={< SubtractionQuiz />} />
+                    <Route path="/learn/first-grade/arithmetics/adding-1s-10s-quiz" element={< Adding1sAnd10sQuiz />} />
+                    <Route path="/learn/first-grade/geometry" element={< Geometry />} />
+                    <Route path="/learn/first-grade/geometry/length-quiz" element={< LengthQuiz />} />
+                    <Route path="/learn/first-grade/geometry/time-quiz" element={< TimeQuiz />} />
+                    <Route path="/learn/first-grade/geometry/shapes-quiz" element={< ShapesQuiz />} />
+                </Route>
 
-                            {/* Other routes <Route path="/messages:friendUserName" element={<MessagesPage />} />/ */}
-                            <Route path="*" element={<NotFoundPage />} />
-                        </Route>
-                    </Routes>
-                </CustomAxiosProvider>
-            </AuthProvider>
-        </Router>
+                {/* only for admins  */}
+                <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+                    <Route path="/admin" element={< AdminPage />} />
+                </Route>
+
+                {/* Other routes <Route path="/messages:friendUserName" element={<MessagesPage />} />/ */}
+                <Route path="*" element={<NotFoundPage />} />
+            </Route>
+        </Routes>
     );
 }
 

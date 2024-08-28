@@ -1,12 +1,14 @@
 import customAxios from "./customAxios";
 
 const RefreshToken = async () => {
+    console.log("Trying to call refresh token endpoint");
+
     try {
         const response = await customAxios.post('/api/authorization/refresh');
 
         if (response.status == 200) {
-            const { message, accessToken, roles } = response.data;
-            return { success: true, status: 200, message, accessToken, roles };
+            const { message, roles } = response.data;
+            return { success: true, status: 200, message, roles };
         }
         else if (response.status == 204) {
             return { success: true, status: 204, message: 'Token still valid' };

@@ -79,16 +79,9 @@ const login = async (email, password, rememberMe) => {
             const responseData = await response.json();
             console.log(responseData);
 
-            // Assuming the response contains a message, requires2fa boolean, access token, and an userEmail
-            const { message, requires2FA, accessToken, userEmail, roles } = responseData;
+            const { message, requires2FA, userEmail, roles } = responseData;
 
-            // Handle the login data (e.g., save to local storage, update state) but in our case we do it in backend
-            // localStorage.setItem('accessToken', accessToken); // Example
-            // localStorage.setItem('requires2fa', requires2fa); // Example
-
-            console.log(`data being sent is as this: ${message},${requires2FA},${accessToken},${userEmail},${roles}`);
-
-            return { success: true, message, requires2FA, accessToken, userEmail, roles };
+            return { success: true, message, requires2FA, userEmail, roles };
         }
 
         // Get the error message from the response if available
@@ -117,11 +110,11 @@ const verifyTwoFactor = async ({ verificationCode, email, rememberMe, rememberTw
         const responseData = await response.json();
         console.log(responseData);
 
-        const { Message, AccessToken } = responseData;
+        const { Message } = responseData;
 
         if (response.ok) {
 
-            return { Success: true, Message, AccessToken };
+            return { Success: true, Message };
         }
         else {
             

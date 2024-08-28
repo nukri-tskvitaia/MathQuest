@@ -3,8 +3,12 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
 const ProtectedRoute = ({ element, redirectTo }) => {
-    const { isAuthenticated } = useAuth();
-    console.log(`Is Authenticated from protected route? ${isAuthenticated}`);
+    const { isAuthenticated, loading } = useAuth();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return isAuthenticated ? <Navigate to={redirectTo} /> : element;
 };
 

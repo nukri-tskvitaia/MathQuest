@@ -24,11 +24,6 @@ namespace MathQuestWebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // For Initial Testing Seeding
-            //services.AddScoped<AbstractDataFactory, ReleaseDataFactory>();
-
-
-            // Signal
             services.AddSignalR();
 
             services.AddDbContext<MathQuestDbContext>(options => 
@@ -111,7 +106,7 @@ namespace MathQuestWebApi
             .AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = jwtSettings!.RequireHttpsMetadata;
-                options.SaveToken = jwtSettings.SaveToken; // I am not using authentication properties i am storing in http only cookies so i do not need this at the moment
+                options.SaveToken = jwtSettings.SaveToken;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = jwtSettings.ValidateIssuer,
@@ -124,7 +119,6 @@ namespace MathQuestWebApi
                     ClockSkew = TimeSpan.Zero
                 };
 
-                 // needed for retrieving jwt token from cookies to use jwt authentification (when i have cookie auth enabled)
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
@@ -146,8 +140,8 @@ namespace MathQuestWebApi
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.SameSite = SameSiteMode.Strict;
-                options.LoginPath = "/Authorization/Login";
-                options.LogoutPath = "/Authorization/Logout";
+                options.LoginPath = "api/Authorization/Login";
+                options.LogoutPath = "api/Authorization/Logout";
                 options.SlidingExpiration = true;
                 //options.AccessDeniedPath = "/Account/AccessDenied";
             });
@@ -188,7 +182,6 @@ namespace MathQuestWebApi
             app.UseRouting();
 
             app.UseAuthentication();
-            //app.UseMiddleware<JwtMiddleware>();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

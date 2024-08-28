@@ -60,11 +60,11 @@ namespace MathQuestWebApi.Services
 
             try
             {
-                var (tokenModel, roles) = await _userService.GetRefreshTokenAsync(context, true).ConfigureAwait(true);
+                var (result, roles) = await _userService.GetRefreshTokenAsync(context, true).ConfigureAwait(true);
                 
-                if (tokenModel != null)
+                if (result)
                 {
-                    var newPrincipal = _jwtService.GetPrincipalFromExpiredToken(tokenModel.AccessToken);
+                    var newPrincipal = _jwtService.GetPrincipalFromExpiredToken(context.Request.Cookies["AccessToken"]);
                     if (newPrincipal != null)
                     {
                         context.User = newPrincipal;

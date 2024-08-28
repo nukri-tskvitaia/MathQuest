@@ -9,7 +9,7 @@ namespace Data.Repositories
     {
         private readonly DbSet<UserExercise> _userExercises;
 
-        public UserExerciseRepository(Data.MathQuestDbContext context)
+        public UserExerciseRepository(MathQuestDbContext context)
             : base(context)
         {
             this._userExercises = context.Set<UserExercise>();

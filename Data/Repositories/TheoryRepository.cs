@@ -9,7 +9,7 @@ namespace Data.Repositories
     {
         private readonly DbSet<Theory> _theories;
 
-        public TheoryRepository(Data.MathQuestDbContext context)
+        public TheoryRepository(MathQuestDbContext context)
             : base(context)
         {
             this._theories = context.Set<Theory>();

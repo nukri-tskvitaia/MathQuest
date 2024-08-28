@@ -37,9 +37,9 @@ namespace MathQuestWebApi.Controllers
                 return BadRequest(new { Message = "User is already logged in." });
             }
 
-            var (token, roles, signInResult) = await _userService.SignInUserAsync(model, HttpContext).ConfigureAwait(false);
+            var (signInResult, roles) = await _userService.SignInUserAsync(model, HttpContext).ConfigureAwait(false);
 
-            if (signInResult == LoginResult.InvalidCredentials)
+            if (signInResult == LoginResult.InvalidCredentials || !roles.Any())
             {
                 return Unauthorized(new { Message = "Invalid email or password." });
             }
@@ -49,7 +49,7 @@ namespace MathQuestWebApi.Controllers
                 return Ok(new { Message = "User requires 2FA", Requires2FA = true, UserEmail = model.Email });
             }
 
-            return Ok(new { Message = "User signed in successfully", Requires2FA = false, AccessToken = token, Roles = roles });
+            return Ok(new { Message = "User signed in successfully", Requires2FA = false, Roles = roles.ToList() });
         }
 
         [HttpPost("verify-2fa")]
@@ -60,14 +60,14 @@ namespace MathQuestWebApi.Controllers
                 return BadRequest(new { Message = "Invalid request." });
             }
 
-            var (token, roles, signInResult) = await _userService.SignInUserWithTwoFactorAsync(HttpContext, model).ConfigureAwait(false);
+            var (signInResult, roles) = await _userService.SignInUserWithTwoFactorAsync(HttpContext, model).ConfigureAwait(false);
 
-            if (signInResult == LoginResult.InvalidCredentials || string.IsNullOrEmpty(token))
+            if (signInResult == LoginResult.InvalidCredentials || !roles.Any())
             {
                 return BadRequest(new { Message = "Invalid Attempt" });
             }
 
-            return Ok(new { Message = "2FA sign in completed successfully", AccessToken = token, Roles = roles });
+            return Ok(new { Message = "2FA sign in completed successfully", Roles = roles.ToList() });
         }
 
         [HttpPost("register")]
@@ -253,27 +253,33 @@ namespace MathQuestWebApi.Controllers
                 return NoContent();
             }
 
-            var (refreshTokenModel, roles) = await _userService.GetRefreshTokenAsync(HttpContext, rememberMe).ConfigureAwait(false);
+            var (result, roles) = await _userService.GetRefreshTokenAsync(HttpContext, rememberMe).ConfigureAwait(false);
 
-            if (refreshTokenModel == null)
+            if (!result || !roles.Any())
             {
-                return Unauthorized(new { Message = "Not permitted." });
+                return Unauthorized(new { Message = " Refresh Expired." });
             }
 
-            return Ok(new { Message = "Tokens updated successfully", refreshTokenModel.AccessToken, roles});
+            return Ok(new { Message = "Tokens updated successfully", Roles = roles.ToList()});
         }
 
         [HttpGet("check-auth")]
         public Task<IActionResult> CheckAuthorization()
         {
-            var accessToken = HttpContext.Request.Cookies["AccessToken"];
+             var accessToken = HttpContext.Request.Cookies["AccessToken"];
 
             if (accessToken == null)
             {
                 return Task.FromResult<IActionResult>(Unauthorized());
             }
 
-            return Task.FromResult<IActionResult>(Ok());
+            var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
+
+            return Task.FromResult<IActionResult>(Ok(new 
+            { 
+                isAuthenticated = true,
+                Roles = roles, 
+            }));
         }
 
         [HttpGet("user-id"), Authorize]

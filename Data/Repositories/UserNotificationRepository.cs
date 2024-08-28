@@ -10,7 +10,7 @@ namespace Data.Repositories
     {
         private readonly DbSet<UserNotification> _userNotifications;
 
-        public UserNotificationRepository(Data.MathQuestDbContext context)
+        public UserNotificationRepository(MathQuestDbContext context)
             : base(context)
         {
             this._userNotifications = context.Set<UserNotification>();

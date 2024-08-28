@@ -12,13 +12,6 @@ const MessengerPage = () => {
     const [selectedConversation, setSelectedConversation] = useState(null);
     const hubConnection = useRef(null);
 
-    if (recentMessages) {
-        recentMessages.map((conversation) => {
-            console.log(JSON.stringify(conversation.friendData.profilePictureUrl));
-        }
-        );
-    }
-
     useEffect(() => {
         fetchCurrentUserId();
     }, []);
@@ -158,7 +151,7 @@ const MessengerPage = () => {
                 {recentMessages.map((conversation, index) => (
                     <div key={index} className="conversation-item" onClick={() => handleConversationSelect(conversation)}>
                         <div className="friend-info">
-                            <img src={selectedConversation?.friendData?.profilePictureUrl} alt={`${conversation.friendData.userName}'s avatar`} className="friend-avatar" />
+                            <img src={conversation?.friendData?.profilePictureUrl} alt={`${conversation.friendData.userName}'s avatar`} className="friend-avatar" />
                             <p className="friend-username">{conversation.friendData.userName}</p>
                         </div>
                         <p className="latest-message">{conversation?.messages[0]?.text}</p>

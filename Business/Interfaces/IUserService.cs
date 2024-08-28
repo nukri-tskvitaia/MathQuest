@@ -22,14 +22,14 @@ namespace Business.Interfaces
         public Task<bool> IsTwoFactorEnabledAsync(User user);
 
         // Authorization & Registration
-        public Task<(string token, IEnumerable<string> roles, LoginResult result)> SignInUserAsync(LoginModel model, HttpContext httpContext);
-        public Task<(string token, IEnumerable<string> roles, LoginResult result)> SignInUserWithTwoFactorAsync(HttpContext httpContext, TwoFactorModel model);
+        public Task<(LoginResult result, IEnumerable<string> roles)> SignInUserAsync(LoginModel model, HttpContext httpContext);
+        public Task<(LoginResult result, IEnumerable<string> roles)> SignInUserWithTwoFactorAsync(HttpContext httpContext, TwoFactorModel model);
         public Task<IdentityResult> RegisterUserAsync(RegisterModel model);
         public Task SetActiveStatusAsync(string userId, bool value);
         public Task<string?> GenerateEmailConfirmationTokenAsync(string email);
         public Task<IdentityResult> ConfirmRegistrationAsync(string email, string confirmationToken);
         public Task<LockoutResult> LockOutUserAsync(LockoutModel model);
-        public Task<(RefreshTokenModel? model, IEnumerable<string> roles)> GetRefreshTokenAsync(HttpContext httpContext, bool rememberMe);
+        public Task<(bool result, IEnumerable<string> roles)> GetRefreshTokenAsync(HttpContext httpContext, bool rememberMe);
         public Task<string> GenerateTokensAsync(HttpContext httpContext, string email, bool rememberMe);
         public Task RemoveTokensAsync(string refreshToken, HttpContext httpContext);
 

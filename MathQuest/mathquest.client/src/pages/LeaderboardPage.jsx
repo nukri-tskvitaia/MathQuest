@@ -8,7 +8,6 @@ const LeaderboardPage = () => {
     const getUserData = async () => {
         try {
             const response = await customAxios.get('api/leaderboard/user/scores');
-            console.log(JSON.stringify(response.data));
             setLeaderboard(response.data);
         } catch(error) {
             console.error('error fetching leaderboard data', error);
