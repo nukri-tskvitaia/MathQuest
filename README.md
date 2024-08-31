@@ -309,17 +309,19 @@ dotnet run
 ## Initial Status
 The `React.js` frontend was initially developed under tight deadlines, focusing primarily on functionality. Key aspects of this early phase included:
 
- - **Authentication & Authorization:** Managed using local storage. While functional, this approach posed security limitations.
+ - **Authentication & Authorization:** Authentication state was synchronized using local storage. Although access and refresh tokens were securely stored in HTTP-only cookies, maintaining the authentication state in local storage posed security limitations.
 - **Global CSS:** Applied universally across the application, leading to challenges with localized styling and theming.
 - **Axios Interceptor:** The Axios interceptor was implemented but did not function as expected.
 - **Profile Picture Display Issue:** On the initial page load, profile pictures were not displayed correctly. They only appeared after refreshing the page, and there was a problem where all messages showed the same profile picture regardless of the sender.
+- **Google Mail Service:** The Google Mail service was not functioning due to invalid credentials, causing issues with sending emails.
 
 ## Current Status
 To enhance security and maintainability, several improvements have been implemented:
 
-- **State Management:** Authentication state and user roles are now managed exclusively using React Context. This approach avoids exposing sensitive data through browser storage, improving overall security.
+- **State Management:** Authentication state and user roles are now managed exclusively using React Context. Access and refresh tokens continue to be stored in HTTP-only cookies, eliminating the need to use local storage for authentication state, thereby improving overall security.
 - **Axios Interceptor:** The Axios interceptor has been fixed and is now functioning correctly, ensuring reliable handling of API requests and responses.
 - **Profile Picture Display Fix:** The issue with profile pictures not displaying correctly on the initial page load has been resolved. Now, the correct profile picture is shown for each message, and images load properly without needing to refresh the page.
+- **Google Mail Service:** The issue with the Google Mail service has been resolved by correcting the credentials. The service is now functioning as expected.
 
 ## Next Steps
 - **Global CSS:** Full modularization and localization of the CSS are still in progress and should be prioritized to avoid styling conflicts.
